@@ -1,10 +1,11 @@
 #include "Transport.h"
 #include <iostream>
 #include <string>
-#include <windows.h>
+
 
 void setupConsole() {
 #ifdef _WIN32 // если windows
+    #include <windows.h>
     SetConsoleOutputCP(CP_UTF8); // вывод utf 8
     SetConsoleCP(CP_UTF8);      // ввод utf 8
 #endif
