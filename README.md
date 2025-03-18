@@ -36,30 +36,30 @@
 
 ## Установка
 **Клонируйте репозиторий**:
-   git clone https://github.com/ваш_пользователь/transport.git
-   cd transport-app
+  - git clone https://github.com/0thw0foxa0/transport.git
+  - cd transport
 
 
-Сборка и запуск
-Linux
+### Сборка и запуск
+## Linux
 Запустите скрипт сборки:
-bash
-chmod +x build.sh
-./build.sh
+- bash
+- chmod +x build.sh
+- ./build.sh
 
 Запустите программу:
-bash
-cd build
-./my_program 23
+- bash
+- cd build
+- ./my_program 23
 
-Windows
+## Windows
 Запустите скрипт сборки:
-bat
-build.bat
-cd build\Debug
+- bat
+- build.bat
+- cd build\Debug
 
 Запустите программу:
-bat
-my_program.exe 23
+- bat
+- my_program.exe 23
 
 
