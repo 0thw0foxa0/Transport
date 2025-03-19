@@ -5,7 +5,11 @@
 
 void setupConsole() {
 #ifdef _WIN32 // если windows
+<<<<<<< HEAD
 #include <windows.h>
+=======
+    #include <windows.h>
+>>>>>>> 79a986849a32fa3aeb412d50d3127c7d89a4abeb
     SetConsoleOutputCP(CP_UTF8); // вывод utf 8
     SetConsoleCP(CP_UTF8);      // ввод utf 8
 #endif
