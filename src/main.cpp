@@ -3,7 +3,8 @@
 #include <string>
 
 
-void setupConsole() {
+void setupConsole() 
+{
 #ifdef _WIN32 // если windows
 <<<<<<< HEAD
 #include <windows.h>
@@ -17,10 +18,12 @@ void setupConsole() {
     std::cout.imbue(std::locale(""));
 }
 
-int main(int argc, char* argv[]) {
+int main(int argc, char* argv[]) 
+{
     setupConsole();
 
-    if (argc != 2) {
+    if (argc != 2) 
+    {
         std::cout << "Использование: " << argv[0] << " <типы транспорта>\n";
         std::cout << "Типы: 0 - мотоцикл, 1 - самокат, 2 - автомобиль, 3 - автобус\n";
         return 1;
@@ -29,12 +32,16 @@ int main(int argc, char* argv[]) {
     TransportFactory factory;
     std::string types = argv[1];
 
-    for (char type : types) {
+    for (char type : types) 
+    {
         Transport* transport = factory.createTransport(type);
-        if (transport) {
+        if (transport) 
+        {
             std::cout << transport->getInfo() << "\n";
             delete transport;
-        } else {
+        } 
+        else 
+        {
             std::cout << "НЕИЗВЕСТНЫЙ ТИП ТРАНСПОРТА: " << type << "\n\n";
         }
     }
