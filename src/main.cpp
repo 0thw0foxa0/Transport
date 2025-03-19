@@ -3,24 +3,18 @@
 #include <string>
 
 
-void setupConsole() 
-{
-#ifdef _WIN32 // если windows
-<<<<<<< HEAD
+#ifdef _WIN32
+#define WIN32_LEAN_AND_MEAN
 #include <windows.h>
-=======
-    #include <windows.h>
->>>>>>> 79a986849a32fa3aeb412d50d3127c7d89a4abeb
-    SetConsoleOutputCP(CP_UTF8); // вывод utf 8
-    SetConsoleCP(CP_UTF8);      // ввод utf 8
 #endif
-    // Настраиваем локаль для wcout
-    std::cout.imbue(std::locale(""));
-}
+
 
 int main(int argc, char* argv[]) 
 {
-    setupConsole();
+    #ifdef _WIN32
+    SetConsoleOutputCP(CP_UTF8); // вывод utf-8 для windows
+    SetConsoleCP(CP_UTF8); // ввод utf-8 для windows
+    #endif
 
     if (argc != 2) 
     {
