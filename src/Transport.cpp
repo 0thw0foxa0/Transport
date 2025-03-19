@@ -1,24 +1,24 @@
 #include "Transport.h"
 
-std::wstring Motorcycle::getInfo() const {
+std::string Motorcycle::getInfo() const {
     return "Наименование транспорта: мотоцикл\n"
            "Кол-во колес: 2\n"
            "Максимальная скорость: 120км/ч\n";
 }
 
-std::wstring Scooter::getInfo() const {
+std::string Scooter::getInfo() const {
     return "Наименование транспорта: самокат\n"
            "Кол-во колес: 2\n"
            "Максимальная скорость: 25км/ч\n";
 }
 
-std::wstring Car::getInfo() const {
+std::string Car::getInfo() const {
     return "Наименование транспорта: автомобиль\n"
            "Кол-во колес: 4\n"
            "Максимальная скорость: 150км/ч\n";
 }
 
-std::wstring Bus::getInfo() const {
+std::string Bus::getInfo() const {
     return "Наименование транспорта: автобус\n"
            "Кол-во колес: 6\n"
            "Максимальная скорость: 100км/ч\n"
