@@ -43,23 +43,19 @@
 ### Сборка и запуск
 ## Linux
 Запустите скрипт сборки:
-- bash
 - chmod +x build.sh
 - ./build.sh
 
 Запустите программу:
-- bash
 - cd build
 - ./my_program 23
 
 ## Windows
 Запустите скрипт сборки:
-- bat
 - build.bat
 - cd build\Debug
 
 Запустите программу:
-- bat
 - my_program.exe 23
 
 
