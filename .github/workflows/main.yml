@@ -1,0 +1,96 @@
+name: CMake on multiple platforms
+
+on:
+  push:
+    branches: [ "testhtml" ]
+  pull_request:
+    branches: [ "testhtml" ]
+
+jobs:
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os:
+          - ubuntu-20.04
+          - ubuntu-22.04
+          - ubuntu-latest
+          - windows-2019
+          - windows-2022
+        compiler:
+          - gcc-11
+          - gcc-12
+          - msvc
+          - mingw
+        exclude:
+          - os: ubuntu-20.04
+            compiler: msvc
+          - os: ubuntu-20.04
+            compiler: mingw
+          - os: ubuntu-22.04
+            compiler: msvc
+          - os: ubuntu-22.04
+            compiler: mingw
+          - os: ubuntu-latest
+            compiler: msvc
+          - os: ubuntu-latest
+            compiler: mingw
+          - os: windows-2019
+            compiler: gcc-11
+          - os: windows-2019
+            compiler: gcc-12
+          - os: windows-2022
+            compiler: gcc-11
+          - os: windows-2022
+            compiler: gcc-12
+      fail-fast: false
+
+    steps:
+    - name: transport repository
+      uses: actions/transport@v4
+
+    - name: Install dependencies (Linux)
+      if: contains(matrix.os, 'Ubuntu')
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y software-properties-common
+        sudo add-apt-repository ppa:ubuntu-toolchain-r/test -y
+        sudo apt-get update
+        sudo apt-get install -y build-essential cmake g++-${{ matrix.compiler == 'gcc-11' && '11' || matrix.compiler == 'gcc-12' && '12' }}
+    - name: Install dependencies (Windows)
+      if: contains(matrix.os, 'windows')
+      run: |
+        choco install cmake --installargs 'ADD_CMAKE_TO_PATH=System' -y
+        if "${{ matrix.compiler }}" == "mingw" choco install mingw -y
+      shell: cmd
+
+    - name: Configure CMake
+      run: |
+        if [ "${{ matrix.compiler }}" == "mingw" ]; then
+          cmake -S . -B build -G "MinGW Makefiles"
+        else
+          cmake -S . -B build
+        fi
+      shell: bash
+
+    - name: Build
+      run: |
+        cmake --build build --config Release
+      shell: bash
+
+    - name: Run
+      run: |
+        if [ "${{ matrix.os }}" = "ubuntu-20.04" ] || [ "${{ matrix.os }}" = "ubuntu-22.04" ] || [ "${{ matrix.os }}" = "ubuntu-latest" ]; then
+          ./build/my_program 23
+        else
+          if [ -f "build/Release/my_program.exe" ]; then
+            ./build/Release/my_program.exe 23
+          else
+            if [ -f "build/Debug/my_program.exe" ]; then
+              ./build/Debug/my_program.exe 23
+            else
+              ./build/my_program.exe 23
+            fi
+          fi
+        fi
+      shell: bash
