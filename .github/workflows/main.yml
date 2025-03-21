@@ -46,8 +46,8 @@ jobs:
       fail-fast: false
 
     steps:
-    - name: transport repository
-      uses: actions/transport@v4
+    - name: Chekcout repository
+      uses: actions/checkout@v4
 
     - name: Install dependencies (Linux)
       if: contains(matrix.os, 'Ubuntu')
