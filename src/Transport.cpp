@@ -1,38 +1,66 @@
 #include "Transport.h"
+#include <sstream>
 
-std::string Motorcycle::getInfo() const 
-{
-    return "Наименование транспорта: мотоцикл\n"
-           "Кол-во колес: 2\n"
-           "Максимальная скорость: 120км/ч\n";
+Motorcycle::Motorcycle() {
+    name = "мотоцикл";
+    wheels = 2;
+    maxSpeed = 120;
 }
 
-std::string Scooter::getInfo() const 
-{
-    return "Наименование транспорта: самокат\n"
-           "Кол-во колес: 2\n"
-           "Максимальная скорость: 25км/ч\n";
+std::string Motorcycle::getInfo() const {
+    std::ostringstream oss;
+    oss << "Наименование транспорта: " << name << "\n"
+        << "Кол-во колес: " << wheels << "\n"
+        << "Максимальная скорость: " << maxSpeed << "км/ч\n";
+    return oss.str();
 }
 
-std::string Car::getInfo() const 
-{
-    return "Наименование транспорта: автомобиль\n"
-           "Кол-во колес: 4\n"
-           "Максимальная скорость: 150км/ч\n";
+Scooter::Scooter() {
+    name = "самокат";
+    wheels = 2;
+    maxSpeed = 25;
 }
 
-std::string Bus::getInfo() const 
-{
-    return "Наименование транспорта: автобус\n"
-           "Кол-во колес: 6\n"
-           "Максимальная скорость: 100км/ч\n"
-           "Максимальное количество пассажиров: 20\n";
+std::string Scooter::getInfo() const {
+    std::ostringstream oss;
+    oss << "Наименование транспорта: " << name << "\n"
+        << "Кол-во колес: " << wheels << "\n"
+        << "Максимальная скорость: " << maxSpeed << "км/ч\n";
+    return oss.str();
 }
 
-Transport* TransportFactory::createTransport(char type) const 
-{
-    switch (type) 
-    {
+Car::Car() {
+    name = "автомобиль";
+    wheels = 4;
+    maxSpeed = 150;
+}
+
+std::string Car::getInfo() const {
+    std::ostringstream oss;
+    oss << "Наименование транспорта: " << name << "\n"
+        << "Кол-во колес: " << wheels << "\n"
+        << "Максимальная скорость: " << maxSpeed << "км/ч\n";
+    return oss.str();
+}
+
+Bus::Bus() {
+    name = "автобус";
+    wheels = 6;
+    maxSpeed = 100;
+    maxPassengers = 20;
+}
+
+std::string Bus::getInfo() const {
+    std::ostringstream oss;
+    oss << "Наименование транспорта: " << name << "\n"
+        << "Кол-во колес: " << wheels << "\n"
+        << "Максимальная скорость: " << maxSpeed << "км/ч\n"
+        << "Максимальное количество пассажиров: " << maxPassengers << "\n";
+    return oss.str();
+}
+
+Transport* TransportFactory::createTransport(char type) const {
+    switch (type) {
         case '0': return new Motorcycle();
         case '1': return new Scooter();
         case '2': return new Car();
